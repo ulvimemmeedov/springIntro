@@ -1,15 +1,20 @@
 package com.springintro.intro.api.controllers;
-import org.springframework.beans.factory.annotation.Autowired;
 /**
  * products controller
  * products api
 */
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 import com.springintro.intro.business.abstracts.ProductService;
+import com.springintro.intro.core.utilities.results.DataResult;
+import com.springintro.intro.core.utilities.results.Result;
 import com.springintro.intro.entities.concretes.Product;
 
 @RestController
@@ -23,8 +28,13 @@ public class ProductsController {
     }
 
     @GetMapping("/all")
-    public List<Product> getAll(){
+    public DataResult<List<Product>> getAll(){
         return this.productService.getAll();
+    }
+    @PostMapping("/add")
+    public Result add(@RequestBody Product product){
+
+        return this.productService.add(product);
     }
     
 }
